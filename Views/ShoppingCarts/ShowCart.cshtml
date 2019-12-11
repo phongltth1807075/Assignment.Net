@@ -1,0 +1,23 @@
+﻿@using ShoppingCart.Models;
+
+@{
+    ViewBag.Title = "GetParameter";
+    var cart = ViewBag.shoppingCart as ShoppingCarts;
+}
+
+<h2>Shopping Cart</h2>
+<ul>
+    @foreach (var item in cart.GetCartItems())
+    {
+        <li>
+            @item.Value.ProductName - @item.Value.Quantity - @item.Value.Price <a onclick="return confirm('Ban co chac muon xoa san pham tuyet voi cua chung toi ra khoi gio hang khong.')" href="/ShoppingCart/RemoveCart?productId=@item.Value.ProductId">Remove</a>
+        </li>
+    }
+</ul>
+<b>Total price: @cart.GetTotalPrice()</b>
+<form action="/ShoppingCarts/CreateOrder" method="post">
+    <h3>Xac nhan thanh toan</h3>
+    <input type="submit" name="name" value="submit" />
+</form>
+
+
